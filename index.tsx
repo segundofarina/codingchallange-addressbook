@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import { render } from 'react-dom';
-import Hello from './Hello';
+import { UsersContextProvider } from './contexts/userContext';
 import './style.css';
+import UsersRoute from './routes/Users';
 
 interface AppProps {}
 interface AppState {
@@ -9,7 +10,11 @@ interface AppState {
 }
 
 const App = () => {
-  return <div>Hello world </div>;
+  return (
+    <UsersContextProvider>
+      <UsersRoute />
+    </UsersContextProvider>
+  );
 };
 
 render(<App />, document.getElementById('root'));
