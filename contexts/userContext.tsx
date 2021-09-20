@@ -9,9 +9,7 @@ type QueryStatus = 'idle' | 'success' | 'loading' | 'error';
 const UsersContext = createContext<
   | {
       users: UserModel[];
-      updateUser: (
-        user: UserModel
-      ) => void;
+      updateUser: (user: UserModel) => void;
       status: QueryStatus;
     }
   | undefined
@@ -28,37 +26,33 @@ const useUsers = () => {
 /**
  * Custom hook to handle Users
  */
-export const UsersContextProvider: React.FC<UsersContextProps> = ({ children }) => {
-
+export const UsersContextProvider: React.FC<UsersContextProps> = ({
+  children,
+}) => {
   const [users, setUsers] = useState<UserModel[]>([]);
   const [status, setStatus] = useState<QueryStatus>('idle');
 
   useEffect(() => {
-    const fetchAsync = async() => {
+    const fetchAsync = async () => {
       setStatus('loading');
       try {
         const _users = await getUsers();
-        setUsers(users);
+        setUsers(_users);
         setStatus('success');
       } catch (e) {
         setStatus('error');
       }
-    }
+    };
     fetchAsync();
   }, []);
 
-
-
-  const updateUser = async (
-    updatedUser: UserModel
-  ) => {
-    setUsers(prevUsers => 
-      prevUsers.map(user => {
-        if(user.id.value === updatedUser.id.value) return updatedUser;
+  const updateUser = async (updatedUser: UserModel) => {
+    setUsers((prevUsers) =>
+      prevUsers.map((user) => {
+        if (user.login.uuid === updatedUser.login.uuid) return updatedUser;
         return user;
-      }
-    ));
-
+      })
+    );
   };
 
   /* Custom hook public interface */
