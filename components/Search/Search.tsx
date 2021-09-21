@@ -12,6 +12,7 @@ const Search: React.FC<SearchProps> = ({ searchValue, changeSearchValue }) => {
       style={styles.root}
       onChange={(e) => changeSearchValue(e.target.value)}
       value={searchValue}
+      placeholder="Search by name"
     />
   );
 };

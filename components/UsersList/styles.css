@@ -1,0 +1,13 @@
+.UserList-root {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.UsersList-no-results {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 40px;
+}

@@ -1,0 +1,36 @@
+.FlipCard_scene {
+  width: 300px;
+  height: 350px;
+  margin: 10px;
+  perspective: 600px;
+}
+
+.FlipCard_card {
+  width: 100%;
+  height: 100%;
+  transition: transform 1s;
+  transform-style: preserve-3d;
+  cursor: pointer;
+  position: relative;
+}
+
+.FlipCard_card_is_flipped {
+  transform: rotateY(180deg);
+}
+
+.FlipCard_card__face {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.FlipCard_card__face--front {
+  /* background: red; */
+}
+
+.FlipCard_card__face--back {
+  /* background: blue; */
+  transform: rotateY(180deg);
+}
