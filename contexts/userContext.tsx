@@ -49,7 +49,7 @@ export const UsersContextProvider: React.FC<UsersContextProps> = ({
   const updateUser = async (updatedUser: UserModel) => {
     setUsers((prevUsers) =>
       prevUsers.map((user) => {
-        if (user.login.uuid === updatedUser.login.uuid) return updatedUser;
+        if (user.id === updatedUser.id) return updatedUser;
         return user;
       })
     );

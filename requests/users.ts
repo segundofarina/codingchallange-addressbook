@@ -49,6 +49,6 @@ const mapApiUserToUserModel = ({
   };
 };
 export const getUsers = async (): Promise<UserModel[]> => {
-  const response = await axios.get<ApiResponse>(`/?results=100`);
+  const response = await axios.get<ApiResponse>(`/?results=20`);
   return response.data.results.map(mapApiUserToUserModel);
 };
