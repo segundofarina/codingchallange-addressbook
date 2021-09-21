@@ -39,11 +39,17 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  /* position: absolute; */
-  z-index: 0;
 }
 
 .User-Card-front-name {
   color: white;
   font-weight: 600;
+}
+
+.User-Card-Edit-Icon {
+  height: 20px;
+  width: 20px;
+  position: relative;
+  top: 20px;
+  left: 20px;
 }

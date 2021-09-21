@@ -5,12 +5,14 @@ import UserModel from '../../models/UserModel';
 import UserCard from '../UserCard';
 import './styles';
 import FlipCard from '../FlipCard/FlipCard';
+import EditCard from '../EditCard/EditCard';
 
 type UsersListProps = {
   users: UserModel[];
+  updateUser: (user: UserModel) => void;
 };
 
-const UsersList: FC<UsersListProps> = ({ users }) => {
+const UsersList: FC<UsersListProps> = ({ users, updateUser }) => {
   if (users.length === 0)
     return <div className="UsersList-no-results">No results</div>;
   const { id, name, email, phone, picture, address } = users[0];
@@ -19,29 +21,22 @@ const UsersList: FC<UsersListProps> = ({ users }) => {
       <FlipCard
         renderBackCard={(toggle) => {
           return (
-            <div>
-              <div>back</div>
-              <button
-                onClick={(e) => {
-                  e.preventDefault();
-                  toggle();
-                }}
-              >
-                flip
-              </button>
-            </div>
+            <EditCard updateInfo={updateUser} user={users[0]} cancel={toggle} />
           );
         }}
         renderFrontCard={(toggle) => {
           return (
-            <UserCard
-              key={`${id}`}
-              name={name}
-              email={email}
-              phone={phone}
-              address={address}
-              profileImgUrl={picture.large}
-            />
+            <div>
+              <UserCard
+                key={`${id}`}
+                name={name}
+                email={email}
+                phone={phone}
+                address={address}
+                profileImgUrl={picture.large}
+                onEditClick={() => toggle()}
+              />
+            </div>
           );
         }}
       />

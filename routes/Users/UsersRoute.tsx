@@ -20,7 +20,7 @@ const sortString = () => {};
 
 const UsersRoute: React.FC<UsersRouteProps> = (props) => {
   // const classes = useStyles(props);
-  const { users, status } = useUsers();
+  const { users, status, updateUser } = useUsers();
   const [searchValue, setSearchValue] = useState('');
   const [sortAttribute, setSortAttribute] = useState<filterAttributes>('name');
   const filteredUsers = useMemo(() => {
@@ -45,9 +45,11 @@ const UsersRoute: React.FC<UsersRouteProps> = (props) => {
       <Select
         options={sortOptions}
         selectedOption={sortAttribute}
-        setSelectedOption={setSortAttribute}
+        setSelectedOption={(option) =>
+          setSortAttribute(option as filterAttributes)
+        }
       />
-      <UsersList users={filteredUsers} />
+      <UsersList users={filteredUsers} updateUser={updateUser} />
     </div>
   );
 };

@@ -1,7 +1,8 @@
-import React from 'react';
+import React, { FC } from 'react';
 import classNames from 'classnames';
 import styles from './styles';
 import './styles.css';
+import editIcon from '../../resources/icons/edit.svg';
 
 type UserCardProps = {
   name: string;
@@ -9,19 +10,24 @@ type UserCardProps = {
   phone: string;
   address: string;
   profileImgUrl: string;
+  onEditClick: () => void;
 };
 
-const UserCard: React.FC<UserCardProps> = ({
+const UserCard: FC<UserCardProps> = ({
   name,
   email,
   phone,
   address,
   profileImgUrl,
+  onEditClick,
 }) => {
   return (
     <div className="User-Card-root">
       <div className="User-Card-front-root">
         <div className="User-Card-front-hero">
+          <div>
+            <img src={editIcon} alt="edit" className="User-Card-Edit-Icon" />
+          </div>
           <div className="User-Card-front-name">{name}</div>
         </div>
         <img src={profileImgUrl} className="User-Card-front-profile-img" />
@@ -32,6 +38,7 @@ const UserCard: React.FC<UserCardProps> = ({
           <a href={`tel:${phone}`}>{phone}</a>
         </div>
         <div>{address}</div>
+        <button onClick={() => onEditClick()}> Edit</button>
       </div>
     </div>
   );
