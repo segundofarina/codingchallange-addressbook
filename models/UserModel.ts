@@ -1,22 +1,10 @@
 export default interface UserModel {
   gender: 'male' | 'female';
-  name: {
-    title: string;
-    first: string;
-    last: string;
-  };
-  location: {
-    street: string;
-    city: string;
-    state: string;
-    postcode: string;
-  };
+  name: string;
+  address: string;
   email: string;
   phone: string;
-  cell: string;
-  login: {
-    uuid: string;
-  };
+  id: string;
   picture: {
     large: string;
     medium: string;

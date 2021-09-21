@@ -1,4 +1,5 @@
 import React from 'react';
+import { FC } from 'react';
 import classNames from 'classnames';
 import { createUseStyles } from 'react-jss';
 import UserModel from '../../models/UserModel';
@@ -8,16 +9,19 @@ type UsersListProps = {
   users: UserModel[];
 };
 
-const UsersList: React.FC<UsersListProps> = ({ users }) => {
+const UsersList: FC<UsersListProps> = ({ users }) => {
+  if (users.length === 0) return <div>No results</div>;
+
   return (
     <div>
-      {users.map(({ login, name, email, phone, picture, location }) => (
+      {users.map(({ id, name, email, phone, picture, address }) => (
         <UserCard
-          key={`${login.uuid}`}
-          name={`${name.first} ${name.last}`}
+          key={`${id}`}
+          name={name}
           email={email}
           phone={phone}
-          address={`${location.city}, ${location.state}`}
+          address={address}
+          profileImgUrl={picture.large}
         />
       ))}
     </div>
