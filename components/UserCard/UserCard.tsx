@@ -11,6 +11,8 @@ type UserCardProps = {
   profileImgUrl: string;
 };
 
+const useStyles = createUseStyles(styles);
+
 const UserCard: React.FC<UserCardProps> = ({
   name,
   email,
@@ -18,6 +20,7 @@ const UserCard: React.FC<UserCardProps> = ({
   address,
   profileImgUrl,
 }) => {
+  const classes = useStyles();
   return (
     <div style={styles.root}>
       <div>{name}</div>
