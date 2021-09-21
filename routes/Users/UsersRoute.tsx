@@ -4,6 +4,7 @@ import UsersList from '../../components/UsersList';
 import Search from '../../components/Search/Search';
 import UserModel from '../../models/UserModel';
 import Select, { SelectOption } from '../../components/Select/Select';
+import './styles.css';
 
 type UsersRouteProps = {};
 
@@ -11,12 +12,10 @@ type UsersRouteProps = {};
 type filterAttributes = 'name' | 'email' | 'address';
 
 const sortOptions: SelectOption[] = [
-  { id: 'name', label: 'Name' },
-  { id: 'email', label: 'Email' },
-  { id: 'address', label: 'Address' },
+  { id: 'name', label: 'Sort by: Name' },
+  { id: 'email', label: 'Sort by: Email' },
+  { id: 'address', label: 'Sort by: Address' },
 ];
-
-const sortString = () => {};
 
 const UsersRoute: React.FC<UsersRouteProps> = (props) => {
   // const classes = useStyles(props);
@@ -25,7 +24,9 @@ const UsersRoute: React.FC<UsersRouteProps> = (props) => {
   const [sortAttribute, setSortAttribute] = useState<filterAttributes>('name');
   const filteredUsers = useMemo(() => {
     return users
-      .filter((user) => user.name.toLowerCase().startsWith(searchValue))
+      .filter((user) =>
+        user.name.toLowerCase().includes(searchValue.toLocaleLowerCase())
+      )
       .sort((a, b) => {
         if (sortAttribute === 'name') {
           return a.name.toLowerCase().localeCompare(b.name.toLowerCase());
@@ -40,15 +41,17 @@ const UsersRoute: React.FC<UsersRouteProps> = (props) => {
   if (status === 'idle' || status === 'loading') return <div>loading data</div>;
   if (status === 'error') return <div>There was an error loading the data</div>;
   return (
-    <div>
-      <Search searchValue={searchValue} changeSearchValue={setSearchValue} />
-      <Select
-        options={sortOptions}
-        selectedOption={sortAttribute}
-        setSelectedOption={(option) =>
-          setSortAttribute(option as filterAttributes)
-        }
-      />
+    <div className="Users-root">
+      <div className="Users-top-bar">
+        <Search searchValue={searchValue} changeSearchValue={setSearchValue} />
+        <Select
+          options={sortOptions}
+          selectedOption={sortAttribute}
+          setSelectedOption={(option) =>
+            setSortAttribute(option as filterAttributes)
+          }
+        />
+      </div>
       <UsersList users={filteredUsers} updateUser={updateUser} />
     </div>
   );

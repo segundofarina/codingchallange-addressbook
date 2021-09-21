@@ -1,4 +1,4 @@
-import React, { useState, ReactElement, FC, useEffect } from 'react';
+import React, { useState, ReactElement, FC } from 'react';
 import classNames from 'classnames';
 import './styles.css';
 
@@ -8,9 +8,11 @@ type FlipCardProps = {
 };
 
 const FlipCard: FC<FlipCardProps> = ({ renderFrontCard, renderBackCard }) => {
-  const [isFlipped, setFlipped] = useState(true);
+  const [isFlipped, setFlipped] = useState(false);
 
-  const toggleFlip = () => setFlipped((prev) => !prev);
+  const frontToggleFlip = () => setFlipped(true);
+  const backToggleFlip = () => setFlipped(false);
+
   return (
     <div className="FlipCard_scene">
       <div
@@ -19,11 +21,11 @@ const FlipCard: FC<FlipCardProps> = ({ renderFrontCard, renderBackCard }) => {
           isFlipped && 'FlipCard_card_is_flipped'
         )}
       >
-        <div className="FlipCard_card__face FlipCard_card__face--front">
-          {!isFlipped && renderFrontCard(toggleFlip)}
+        <div className="FlipCard_card__face FlipCard_card__face--front ">
+          {renderFrontCard(frontToggleFlip)}
         </div>
         <div className="FlipCard_card__face FlipCard_card__face--back">
-          {isFlipped && renderBackCard(toggleFlip)}
+          {renderBackCard(backToggleFlip)}
         </div>
       </div>
     </div>

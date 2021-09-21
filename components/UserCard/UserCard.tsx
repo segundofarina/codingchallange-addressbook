@@ -1,6 +1,5 @@
 import React, { FC } from 'react';
 import classNames from 'classnames';
-import styles from './styles';
 import './styles.css';
 import editIcon from '../../resources/icons/edit.svg';
 
@@ -26,7 +25,12 @@ const UserCard: FC<UserCardProps> = ({
       <div className="User-Card-front-root">
         <div className="User-Card-front-hero">
           <div>
-            <img src={editIcon} alt="edit" className="User-Card-Edit-Icon" />
+            <img
+              src={editIcon}
+              alt="edit"
+              className="User-Card-Edit-Icon"
+              onClick={() => onEditClick()}
+            />
           </div>
           <div className="User-Card-front-name">{name}</div>
         </div>
@@ -38,7 +42,6 @@ const UserCard: FC<UserCardProps> = ({
           <a href={`tel:${phone}`}>{phone}</a>
         </div>
         <div>{address}</div>
-        <button onClick={() => onEditClick()}> Edit</button>
       </div>
     </div>
   );

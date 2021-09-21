@@ -10,7 +10,6 @@
   height: 100%;
   transition: transform 1s;
   transform-style: preserve-3d;
-  cursor: pointer;
   position: relative;
 }
 
@@ -27,10 +26,21 @@
 }
 
 .FlipCard_card__face--front {
-  /* background: red; */
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+}
+
+.FlipCard_card__face--front > * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  transform: translateZ(1px);
 }
 
 .FlipCard_card__face--back {
-  /* background: blue; */
-  transform: rotateY(180deg);
+  transform: translateZ(-1px) rotateY(180deg);
+}
+
+.FlipCard_card__face--back > * {
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { createContext, useEffect, useMemo, useState, useContext } from 'react';
+import { createContext, useEffect, useState, useContext } from 'react';
 import UserModel from '../models/UserModel';
 import { getUsers } from '../requests/users';
 

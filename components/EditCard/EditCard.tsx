@@ -1,16 +1,18 @@
 import React, { ChangeEvent, FC, useState } from 'react';
-import classNames from 'classnames';
 import './styles.css';
 import UserModel from '../../models/UserModel';
+import cancelIcon from '../../resources/icons/cancel-close.svg';
 
 type EditCardProps = {
-  user: UserModel;
-  updateInfo: (user: UserModel) => void;
+  user: Pick<UserModel, 'name' | 'email' | 'phone' | 'address'>;
+  updateInfo: (
+    user: Pick<UserModel, 'name' | 'email' | 'phone' | 'address'>
+  ) => void;
   cancel: () => void;
 };
 
 const EditCard: FC<EditCardProps> = ({ user, updateInfo, cancel }) => {
-  const { name, email, phone, address, id, picture, gender } = user;
+  const { name, email, phone, address } = user;
   const [editedName, setEditedName] = useState(name);
   const [editedEmail, setEditedEmail] = useState(email);
   const [editedPhone, setEditedPhone] = useState(phone);
@@ -20,54 +22,76 @@ const EditCard: FC<EditCardProps> = ({ user, updateInfo, cancel }) => {
     (update: (val: string) => void) => (e: ChangeEvent<HTMLInputElement>) =>
       update(e.target.value);
 
-  const updateUserHandler = () => {
-    updateInfo({
-      id,
-      picture,
-      email: editedEmail,
-      address: editedAddress,
-      gender,
-      name: editedName,
-      phone: editedPhone,
-    });
-  };
   return (
     <div className="Edit-Card-root">
+      <div>
+        <img
+          src={cancelIcon}
+          alt="edit"
+          className="Edit-Card-Cancel-Icon"
+          onClick={() => cancel()}
+        />
+      </div>
       <form
         className="Edit-Card-back-root"
         onSubmit={(e) => {
           e.preventDefault();
-          updateUserHandler();
+          updateInfo({
+            email: editedEmail,
+            address: editedAddress,
+            name: editedName,
+            phone: editedPhone,
+          });
         }}
       >
         <div>
-          <div>Name</div>
-          <input value={editedName} onChange={onChangeHandler(setEditedName)} />
+          <div>
+            <label htmlFor="name">Name</label>
+          </div>
+          <input
+            id="name"
+            value={editedName}
+            className="Edit-Card-input"
+            onChange={onChangeHandler(setEditedName)}
+          />
         </div>
         <div>
-          <div>Email</div>
+          <div>
+            <label htmlFor="email">Email</label>
+          </div>
           <input
+            id="email"
             value={editedEmail}
+            className="Edit-Card-input"
             onChange={onChangeHandler(setEditedEmail)}
           />
         </div>
         <div>
-          <div>Phone</div>
+          <div>
+            <label htmlFor="phone">Phone</label>
+          </div>
           <input
+            id="phone"
             value={editedPhone}
+            className="Edit-Card-input"
             onChange={onChangeHandler(setEditedPhone)}
           />
         </div>
         <div>
-          <div>Address</div>
+          <div>
+            <label htmlFor="address">Address</label>
+          </div>
           <input
+            id="address"
             value={editedAddress}
+            className="Edit-Card-input"
             onChange={onChangeHandler(setEditedAddress)}
           />
         </div>
-        <div>
-          <button onClick={(e) => cancel()}>Cancel</button>
-          <button type="submit">Update</button>
+        <div className="Edit-card-buttons">
+          <button type="submit" className="Edit-card-buttons-update">
+            Update
+          </button>
         </div>
       </form>
     </div>

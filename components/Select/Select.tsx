@@ -1,5 +1,5 @@
 import React, { FC } from 'react';
-import styles from './styles';
+import './styles.css';
 
 export type SelectOption = Readonly<{ label: string; id: string }>;
 export type SelectProps = {
@@ -15,7 +15,7 @@ const Select: FC<SelectProps> = ({
 }) => {
   return (
     <select
-      style={styles.root}
+      className="Select-root"
       onChange={(e) => {
         if (selectedOption) setSelectedOption(e.target.value);
       }}

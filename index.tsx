@@ -4,11 +4,6 @@ import { UsersContextProvider } from './contexts/userContext';
 import './style.css';
 import UsersRoute from './routes/Users/UsersRoute';
 
-interface AppProps {}
-interface AppState {
-  name: string;
-}
-
 const App = () => {
   return (
     <UsersContextProvider>

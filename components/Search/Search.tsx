@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './styles';
+import './styles.css';
 
 type SearchProps = {
   searchValue: string;
@@ -9,7 +9,7 @@ type SearchProps = {
 const Search: React.FC<SearchProps> = ({ searchValue, changeSearchValue }) => {
   return (
     <input
-      style={styles.root}
+      className="Search-root"
       onChange={(e) => changeSearchValue(e.target.value)}
       value={searchValue}
       placeholder="Search by name"
