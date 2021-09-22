@@ -19,9 +19,10 @@ const Select: FC<SelectProps> = ({
       onChange={(e) => {
         if (selectedOption) setSelectedOption(e.target.value);
       }}
+      value={selectedOption}
     >
       {options.map(({ id, label }) => (
-        <option key={id} value={id} selected={selectedOption === id}>
+        <option key={id} value={id}>
           {label}
         </option>
       ))}
