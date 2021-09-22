@@ -1,6 +1,5 @@
 import React from 'react';
 import { FC } from 'react';
-import classNames from 'classnames';
 import UserModel from '../../models/UserModel';
 import FlipableUserCard from '../FlipableUserCard';
 import './styles';

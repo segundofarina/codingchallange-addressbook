@@ -2,13 +2,12 @@ import React, { useMemo, useState } from 'react';
 import useUsers from '../../contexts/userContext';
 import UsersList from '../../components/UsersList';
 import Search from '../../components/Search/Search';
-import UserModel from '../../models/UserModel';
 import Select, { SelectOption } from '../../components/Select/Select';
 import './styles.css';
+import Spinner from '../../components/Spinner/Spinner';
 
 type UsersRouteProps = {};
 
-// const useStyles = createUseStyles(styles);
 type filterAttributes = 'name' | 'email' | 'address';
 
 const sortOptions: SelectOption[] = [
@@ -18,7 +17,6 @@ const sortOptions: SelectOption[] = [
 ];
 
 const UsersRoute: React.FC<UsersRouteProps> = (props) => {
-  // const classes = useStyles(props);
   const { users, status, updateUser } = useUsers();
   const [searchValue, setSearchValue] = useState('');
   const [sortAttribute, setSortAttribute] = useState<filterAttributes>('name');
@@ -34,12 +32,22 @@ const UsersRoute: React.FC<UsersRouteProps> = (props) => {
           return a.email.toLowerCase().localeCompare(b.email.toLowerCase());
         } else if (sortAttribute === 'address') {
           return a.address.toLowerCase().localeCompare(b.address.toLowerCase());
+        } else {
+          return 1;
         }
       });
   }, [users, searchValue, sortAttribute]);
 
-  if (status === 'idle' || status === 'loading') return <div>loading data</div>;
-  if (status === 'error') return <div>There was an error loading the data</div>;
+  if (status === 'idle' || status === 'loading')
+    return (
+      <div className="Users-root Users-loading">
+        <Spinner />
+      </div>
+    );
+  if (status === 'error')
+    return (
+      <div className="Users-root">There was an error loading the data</div>
+    );
   return (
     <div className="Users-root">
       <div className="Users-top-bar">

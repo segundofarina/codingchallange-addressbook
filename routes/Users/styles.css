@@ -10,6 +10,9 @@
 .Users-top-bar > * {
   margin-right: 18px;
 }
+.Users-loading {
+  height: 100vh;
+}
 
 .Users-root {
   margin: 10px;

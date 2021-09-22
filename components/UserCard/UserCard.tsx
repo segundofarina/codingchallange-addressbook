@@ -1,5 +1,4 @@
 import React, { FC } from 'react';
-import classNames from 'classnames';
 import './styles.css';
 import editIcon from '../../resources/icons/edit.svg';
 
