@@ -10,9 +10,7 @@
     "axios": "^0.21.1",
     "classnames": "^2.2.6",
     "react": "^16.13.1",
-    "react-dom": "^16.13.1",
-    "react-scripts": "^3.4.3",
-    "typescript": "^3.7.5"
+    "react-dom": "^16.13.1"
   },
   "scripts": {
     "start": "react-scripts-ts start",
@@ -21,6 +19,6 @@
     "eject": "react-scripts-ts eject"
   },
   "devDependencies": {
-    "react-scripts-ts": "latest"
+    "react-scripts": "latest"
   }
 }
